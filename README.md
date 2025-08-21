@@ -10,14 +10,18 @@ This example demonstrates how to create a web interface for the [Craftax environ
 - Multiple tasks: gathering resources, crafting tools, avoiding dangers
 - Day/night cycle
 
+## Installation
+
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install dependencies
+uv sync
+```
+
 ## Running the Example
 ```bash
-# Install dependencies
-pip install "git+https://github.com/wcarvalho/nicewebrl.git#egg=nicewebrl[craftax]"
-# or 
-pip install -e ".[craftax]"
-
 # Run the web app
-cd examples/craftax
-python web_app.py
+uv run python web_app.py
 ``` 
