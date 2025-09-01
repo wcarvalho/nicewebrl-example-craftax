@@ -2,6 +2,7 @@ import jax
 import jax.numpy as jnp
 from typing import Optional
 from nicegui import ui
+import time
 
 from flax import struct
 from craftax.craftax.renderer import render_craftax_pixels
@@ -21,7 +22,7 @@ logger = get_logger(__name__)
 MAX_STAGE_EPISODES = 1
 MAX_EPISODE_TIMESTEPS = 10000
 MIN_SUCCESS_EPISODES = 1
-VERBOSITY = 1
+VERBOSITY = 10
 
 
 ########################################
@@ -56,13 +57,19 @@ def render_fn(timestep: nicewebrl.TimeStep):
   return image.astype(jnp.uint8)
 
 
-# jit it so fast
-render_fn = jax.jit(render_fn)
-
 # precompile vmapped render fn that will vmap over all actions
 vmap_render_fn = jax_web_env.precompile_vmap_render_fn(
   render_fn, jax_env.default_params
 )
+
+# jit it and precompile
+print("Compiling render function.")
+start = time.time()
+render_fn = jax.jit(render_fn)
+render_fn = render_fn.lower(
+  jax_web_env.reset(jax.random.PRNGKey(0), jax_env.default_params)
+).compile()
+print(f"\ttime: {time.time() - start}")
 
 
 ########################################
@@ -166,7 +173,4 @@ environment_stage = EnvStage(
 )
 all_stages.append(environment_stage)
 
-experiment = SimpleExperiment(
-  stages=all_stages,
-  name="Craftax Demo"
-)
+experiment = SimpleExperiment(stages=all_stages, name="Craftax Demo")
