@@ -21,7 +21,14 @@ uv sync
 ```
 
 ## Running the Example
+We provide two examples for defining a web app. 
+* One that uses `nicewebrl.run_experiment` which does most of the work of setting up the interface for you.
+* Another that let's you define your own custom interface. They have the same logic.
+
 ```bash
-# Run the web app
-uv run python web_app.py
-``` 
+# Run the web app using nicewebrl.run_experiment
+uv run python web_app_auto.py
+
+# Run the web app with a manually defined interface
+uv run python web_app_manual.py
+```
