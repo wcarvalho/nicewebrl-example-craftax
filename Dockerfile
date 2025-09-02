@@ -14,4 +14,4 @@ RUN uv sync --frozen
 ENV PYTHONUNBUFFERED=1
 ENV LOG_LEVEL=DEBUG
 
-CMD ["uv", "run", "python", "web_app.py"]
+CMD ["uv", "run", "python", "web_app_auto.py"]

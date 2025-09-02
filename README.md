@@ -32,3 +32,26 @@ uv run python web_app_auto.py
 # Run the web app with a manually defined interface
 uv run python web_app_manual.py
 ```
+
+## Deploying online with fly.io
+
+**Prerequisites**: Install the [fly CLI](https://fly.io/docs/hands-on/install-flyctl/)
+
+```bash
+# Login to fly.io
+flyctl auth login
+
+# setup configuration
+flyctl launch --dockerfile Dockerfile --name craftax-nicewebrl-example --config fly.toml --vm-size 'performance-8x' --yes
+
+# deploy to servers/update deployment
+flyctl deploy --config fly.toml
+
+# scale to multiple regions (optional, for decreasing latency)
+flyctl scale count 10 --config fly.toml --region "iad,sea,lax,den" --yes
+
+# to see logs of run
+flyctl logs --config fly.toml
+```
+
+**Note:** [fly.io pricing](https://fly.io/docs/about/pricing/)

@@ -1,12 +1,13 @@
-# fly.toml app configuration file generated for nicewebrl-crafter on 2025-05-09T21:32:28-04:00
+# fly.toml app configuration file generated for craftax-nicewebrl-example on 2025-09-02T15:05:13-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'nicewebrl-crafter'
-primary_region = 'ewr'
+app = 'craftax-nicewebrl-example'
+primary_region = 'bos'
 
 [build]
+  dockerfile = 'Dockerfile'
 
 [http_service]
   internal_port = 8080
@@ -17,5 +18,4 @@ primary_region = 'ewr'
   processes = ['app']
 
 [[vm]]
-  size = 'performance-4x'
-  memory = '8gb'
+  size = 'performance-8x'
