@@ -33,6 +33,7 @@ nicewebrl.run(
   experiment_file="experiment_structure.py",
   title="NiceWebRL Craftax Experiment",
   reload=False,
-  on_startup_fn=restore_texture_cache_if_needed,  # e.g. restore cache
+  on_database_init_fn=restore_texture_cache_if_needed,  # e.g. restore cache
   on_termination_fn=None,  # e.g. saving and uploading to cloud storage
+  show=False,
 )
